@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_masukan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.insiteprojectid.masakyuk.controller.MasukanActivity">
+
+
+    <TextView
+        android:text="Terima Kasih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:textSize="36dp"
+        android:id="@+id/terima_kasih" />
+
+    <TextView
+        android:text="Kritik dan saran Anda sangat dibutuhkan untuk pengembangan aplikasi ini. Beri rating dan ulasan untuk aplikasi ini di Play Store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/terima_kasih"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp"
+        android:id="@+id/des_terima_kasih"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/btnLihatBahan"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/btn_ulas_bg"
+        android:text="Tidak, Terima Kasih"
+        android:textColor="@color/btn_ulas"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="66dp" />
+
+    <Button
+        android:id="@+id/btnLihatHarga"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/btn_ulas"
+        android:text="Beri rating dan ulasan"
+        android:textColor="@color/btn_ulas_bg"
+        android:layout_above="@+id/btnLihatBahan"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="36dp" />
+</RelativeLayout>

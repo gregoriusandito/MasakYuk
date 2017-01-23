@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/wishlist"
+            android:icon="@drawable/heart_black"
+            android:title="My Wishlist" />
+        <item
+            android:id="@+id/masukan"
+            android:icon="@drawable/discuss_issue"
+            android:title="Tools" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/exit"
+                android:icon="@drawable/quit"
+                android:title="Exit" />
+        </menu>
+    </item>
+
+</menu>

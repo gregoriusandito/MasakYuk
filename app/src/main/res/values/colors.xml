@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary"> #D4DAD6</color>
+    <color name="colorPrimaryDark">#BAC0BC</color>
+    <color name="colorAccent">#A1A7A3</color>
+    <color name="base">#edf3ef</color>
+    <color name="boxInfo">#cd000000</color>
+    <color name="boxFoodType">#fafafa</color>
+    <color name="bg_ulas">#26ae90</color>
+    <color name="bg_tidak">#2e3237</color>
+    <color name="btn_ulas">#26ae90</color>
+    <color name="btn_ulas_bg">#eceef1</color>
+</resources>
