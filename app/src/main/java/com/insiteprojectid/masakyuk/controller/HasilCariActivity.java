@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -42,7 +43,8 @@ public class HasilCariActivity extends AppCompatActivity {
     ResepModel resepModel;
     ListAdapter listAdapter;
     JSONArray jsonArray;
-    ImageView shareIcon;
+    private ImageView shareIcon;
+    private TextView emptyTextCari;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,9 @@ public class HasilCariActivity extends AppCompatActivity {
         lv = (ListView)findViewById(R.id.list_resep);
         DaftarResep = new ArrayList<>();
         shareIcon = (ImageView)findViewById(R.id.share);
+        emptyTextCari = (TextView)findViewById(R.id.emptyTextCari);
+
+        lv.setEmptyView(emptyTextCari);
 
         handleIntent(getIntent());
 
@@ -132,7 +137,7 @@ public class HasilCariActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                SetListResep(DaftarResep);
+                SetListResep(DaftarResep, query);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -165,10 +170,10 @@ public class HasilCariActivity extends AppCompatActivity {
             pDialog.dismiss();
     }
 
-    private void SetListResep(ArrayList<HashMap<String, String>> daftarResep) {
+    private void SetListResep(ArrayList<HashMap<String, String>> daftarResep, String query) {
         if (daftarResep.size() == 0) {
             listAdapter = new ListAdapter(this, new ArrayList<HashMap<String, String>>());
-//            emptyTV.setText("Tidak ada komentar");
+            emptyTextCari.setText("Tidak ada hasil yang ditemukan untuk bahan "+query);
             lv.setAdapter(listAdapter);
             listAdapter.notifyDataSetInvalidated();
         } else {
