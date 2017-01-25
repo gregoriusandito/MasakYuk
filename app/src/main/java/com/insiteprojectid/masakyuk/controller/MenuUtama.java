@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import com.insiteprojectid.masakyuk.R;
 import com.insiteprojectid.masakyuk.model.ResepModel;
+import com.insiteprojectid.masakyuk.model.WishListModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +55,8 @@ public class MenuUtama extends AppCompatActivity
 
     private String[] tabs = { "Resep", "Rekomendasi", "Jenis" };
 
+    private WishListModel db;
+
     ResepFragment resepFragment;
     RekomendasiFragment rekomendasiFragment;
     ImageView shareIcon;
@@ -74,6 +77,7 @@ public class MenuUtama extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        db = new WishListModel(getApplicationContext());
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

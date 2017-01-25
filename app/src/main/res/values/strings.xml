@@ -14,10 +14,7 @@
     <string name="search_hint">Cari Berdasarkan Bahan</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <string name="add_favr">Added to Favorites</string>
-    <string name="remove_favr">Removed from Favorites</string>
-    <string name="no_favorites_items">No Favorites</string>
-    <string name="no_favorites_msg">Long press on item to add to favorites.</string>
-    <string name="favorites_remove_msg">Long press on item to remove from favorites.</string>
+    <string name="keterangan_total_harga">*Harga diatas hanyalah estimasi dan dapat berubah sewaktu-waktu. Harga tidak mengikat, dapat lebih murah atau lebih mahal bergantung pada kondisi pasar</string>
+    
 
 </resources>

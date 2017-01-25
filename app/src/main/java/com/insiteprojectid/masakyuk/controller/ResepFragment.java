@@ -24,6 +24,7 @@ import com.google.gson.JsonArray;
 import com.insiteprojectid.masakyuk.R;
 import com.insiteprojectid.masakyuk.adapter.ListAdapter;
 import com.insiteprojectid.masakyuk.model.ResepModel;
+import com.insiteprojectid.masakyuk.model.WishListModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +47,8 @@ public class ResepFragment extends Fragment {
     ResepModel resepModel;
     ListAdapter listAdapter;
     JSONArray jsonArray;
-    ImageView shareIcon;
+    ImageView shareIcon, favouriteIcon;
+    private WishListModel db;
 
     public ResepFragment() {
         // Required empty public constructor
@@ -58,11 +60,13 @@ public class ResepFragment extends Fragment {
                              Bundle savedInstanceState) {
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
+        db = new WishListModel(getActivity());
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_resep, container, false);
         lv = (ListView)rootView.findViewById(R.id.list_resep);
         DaftarResep = new ArrayList<>();
         shareIcon = (ImageView)rootView.findViewById(R.id.share);
+        favouriteIcon = (ImageView)rootView.findViewById(R.id.fav);
 
         loadResep();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -112,6 +116,12 @@ public class ResepFragment extends Fragment {
                         map_resep.put(resepModel.link_youtube,link_youtube);
                         map_resep.put(resepModel.rekomendasi,rekomendasi);
                         DaftarResep.add(map_resep);
+//                        if(db.isExists(daftar_resep.get(resepModel.getId_resep()))){
+//                            favouriteIcon.setImageResource(R.drawable.heart_black);
+//                        } else {
+//                            favouriteIcon.setImageResource(R.drawable.heart_white);
+//                        }
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
