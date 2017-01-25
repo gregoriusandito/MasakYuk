@@ -36,7 +36,7 @@
         android:id="@+id/btnLihatBahan"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/btn_ulas_bg"
+        android:background="#ffffff"
         android:text="Lihat bahan yang dibutuhkan"
         android:textColor="@color/btn_ulas"
         android:layout_marginTop="47dp"

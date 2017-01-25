@@ -5,4 +5,23 @@ package com.insiteprojectid.masakyuk.model;
  */
 
 public class CaraModel {
+
+    public static final String BASE_URL="http://192.168.0.120/masakyuk/";
+    public static final String GET_LIST_CARA_MEMASAK=BASE_URL+"Welcome/get_list_cara_memasak";
+
+    public static final String id_resep="id_resep";
+    public static final String id_cara_memasak="id_cara_memasak";
+    public static final String cara="cara";
+
+    public static String getId_resep() {
+        return id_resep;
+    }
+
+    public static String getId_cara_memasak() {
+        return id_cara_memasak;
+    }
+
+    public static String getCara() {
+        return cara;
+    }
 }

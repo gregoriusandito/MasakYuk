@@ -6,12 +6,14 @@ package com.insiteprojectid.masakyuk.model;
 public class ResepModel {
 
     public static final String BASE_URL="http://192.168.0.120/masakyuk/";
-        public static final String BASE_IMG=BASE_URL+"gambar/";
+    public static final String BASE_IMG=BASE_URL+"gambar/";
     public static final String GET_RESEP=BASE_URL+"Welcome/get_resep";
     public static final String GET_REKOMENDASI=BASE_URL+"Welcome/get_rekomendasi_resep";
     public static final String GET_MAKANAN_PEMBUKA=BASE_URL+"Welcome/get_list_makanan_pembuka";
     public static final String GET_MAKANAN_UTAMA=BASE_URL+"Welcome/get_list_makanan_utama";
     public static final String GET_MAKANAN_PENUTUP=BASE_URL+"Welcome/get_list_makanan_penutup";
+    public static final String GET_HASIL_CARI=BASE_URL+"Welcome/get_list_hasil_cari";
+
 
     public static final String id_resep = "id_resep";
     public static final String id_cat = "id_cat";
@@ -19,7 +21,6 @@ public class ResepModel {
     public static final String gambar = "gambar";
     public static final String link_youtube = "link_youtube";
     public static final String rekomendasi = "rekomendasi";
-
 
     public static String getId_resep() {
         return id_resep;
@@ -44,4 +45,5 @@ public class ResepModel {
     public static String getRekomendasi() {
         return rekomendasi;
     }
+
 }

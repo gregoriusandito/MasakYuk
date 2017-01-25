@@ -61,18 +61,20 @@ public class RekomendasiFragment extends Fragment {
 
         loadResepRekomendasi();
 
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent i = new Intent(getActivity().getApplicationContext(),ResepActivity.class);
-//                String selectedItem = menuItem[position];
-//                Toast.makeText(getActivity().getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
-//                startActivity(i);
-////                getActivity().finish();
-//            }
-//        });
-//
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                HashMap<String,String> map = DaftarResep.get(position);
+                Intent i = new Intent(getActivity().getApplicationContext(),ResepActivity.class);
+                i.putExtra(resepModel.id_resep,map.get(resepModel.id_resep));
+                i.putExtra(resepModel.link_youtube,map.get(resepModel.link_youtube));
+                i.putExtra(resepModel.judul,map.get(resepModel.judul));
+                startActivity(i);
+//                getActivity().finish();
+            }
+        });
+
         return rootView;
     }
 

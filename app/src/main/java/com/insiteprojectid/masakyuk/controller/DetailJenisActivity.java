@@ -1,16 +1,10 @@
 package com.insiteprojectid.masakyuk.controller;
 
 import android.app.ProgressDialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -33,28 +27,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HasilCariActivity extends AppCompatActivity {
+public class DetailJenisActivity extends AppCompatActivity {
 
     ListView lv;
     ArrayList<HashMap<String, String>> DaftarResep = new ArrayList<>();
     ProgressDialog pDialog;
-    private static final String TAG = HasilCariActivity.class.getSimpleName();
+    private static final String TAG = DetailJenisActivity.class.getSimpleName();
     ResepModel resepModel;
     ListAdapter listAdapter;
     JSONArray jsonArray;
     ImageView shareIcon;
+    String URL_JENIS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hasil_cari);
+        setContentView(R.layout.activity_detail_jenis);
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         lv = (ListView)findViewById(R.id.list_resep);
         DaftarResep = new ArrayList<>();
         shareIcon = (ImageView)findViewById(R.id.share);
 
-        handleIntent(getIntent());
+        //get Intent
+        Intent intent = getIntent();
+        String mode = intent.getStringExtra("detail_code");
+        loadResepByJenis(mode);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -71,39 +69,20 @@ public class HasilCariActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_utama, menu);
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.menu_search).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
-
-        return true;
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        handleIntent(intent);
-    }
-
-    private void handleIntent(Intent intent) {
-
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            loadResep(query);
-        }
-    }
-
-    private void loadResep(final String query) {
+    private void loadResepByJenis(String jenis){
         String tag_string_req = "req_load_resep";
         pDialog.setMessage("Memuat ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, ResepModel.GET_HASIL_CARI, new Response.Listener<String>() {
+        if(jenis.matches("pembuka")){
+            URL_JENIS = ResepModel.GET_MAKANAN_PEMBUKA;
+        } else if (jenis.matches("utama")){
+            URL_JENIS = ResepModel.GET_MAKANAN_UTAMA;
+        } else if (jenis.matches("penutup")){
+            URL_JENIS = ResepModel.GET_MAKANAN_PENUTUP;
+        }
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, URL_JENIS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Resep Response: " + response.toString());
@@ -112,21 +91,21 @@ public class HasilCariActivity extends AppCompatActivity {
                 try {
                     JSONObject jObj = new JSONObject(response);
                     jsonArray = jObj.getJSONArray("resep");
-                    for (int i = 0; i < jsonArray.length(); i++) {
+                    for(int i = 0; i < jsonArray.length(); i++){
                         JSONObject c = jsonArray.getJSONObject(i);
                         String id_resep = c.getString("id_resep");
                         String id_cat = c.getString("id_cat");
                         String judul = c.getString("judul");
-                        String gambar = ResepModel.BASE_IMG + c.getString("gambar");
+                        String gambar = ResepModel.BASE_IMG+c.getString("gambar");
                         String link_youtube = c.getString("link_youtube");
                         String rekomendasi = c.getString("rekomendasi");
-                        HashMap<String, String> map_resep = new HashMap<>();
-                        map_resep.put(resepModel.id_resep, id_resep);
-                        map_resep.put(resepModel.id_cat, id_cat);
-                        map_resep.put(resepModel.judul, judul);
-                        map_resep.put(resepModel.gambar, gambar);
-                        map_resep.put(resepModel.link_youtube, link_youtube);
-                        map_resep.put(resepModel.rekomendasi, rekomendasi);
+                        HashMap<String,String> map_resep = new HashMap<>();
+                        map_resep.put(resepModel.id_resep,id_resep);
+                        map_resep.put(resepModel.id_cat,id_cat);
+                        map_resep.put(resepModel.judul,judul);
+                        map_resep.put(resepModel.gambar,gambar);
+                        map_resep.put(resepModel.link_youtube,link_youtube);
+                        map_resep.put(resepModel.rekomendasi,rekomendasi);
                         DaftarResep.add(map_resep);
                     }
                 } catch (JSONException e) {
@@ -147,13 +126,14 @@ public class HasilCariActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("query", query);
+//                params.put("id_kota", id_kota);
 //                params.put("id_wisata", id_wisata);
                 return params;
             }
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
 
     private void showDialog() {
         if (!pDialog.isShowing())
@@ -166,7 +146,7 @@ public class HasilCariActivity extends AppCompatActivity {
     }
 
     private void SetListResep(ArrayList<HashMap<String, String>> daftarResep) {
-        if (daftarResep.size() == 0) {
+        if(daftarResep.size() == 0) {
             listAdapter = new ListAdapter(this, new ArrayList<HashMap<String, String>>());
 //            emptyTV.setText("Tidak ada komentar");
             lv.setAdapter(listAdapter);

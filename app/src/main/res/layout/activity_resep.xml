@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/main"
     tools:context="com.insiteprojectid.masakyuk.controller.ResepActivity">
 
@@ -88,7 +88,6 @@
                 android:text="@string/bahan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/scrollView2"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="27dp"
@@ -105,42 +104,24 @@
                 android:layout_gravity="center"
                 android:background="@color/boxInfo" />
 
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/listBahan"/>
 
-            <TextView
-                android:text="@string/bumbu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/scrollView2"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="27dp"
-                android:layout_marginStart="27dp"
-                android:layout_marginTop="28dp"
-                android:id="@+id/judul_bumbu" />
-
-            <View
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="27dp"
                 android:layout_marginRight="27dp"
-                android:layout_gravity="center"
-                android:background="@color/boxInfo" />
+                >
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listBahan"/>
 
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/listBumbu"/>
+            </FrameLayout>
 
             <TextView
                 android:text="@string/cara_masak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/scrollView2"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="27dp"
@@ -157,10 +138,17 @@
                 android:layout_gravity="center"
                 android:background="@color/boxInfo" />
 
-            <ListView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/listCara"/>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                >
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listCara"/>
+            </FrameLayout>
 
         </LinearLayout>
 

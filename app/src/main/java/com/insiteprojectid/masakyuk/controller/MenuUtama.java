@@ -25,9 +25,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.insiteprojectid.masakyuk.R;
+import com.insiteprojectid.masakyuk.model.ResepModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MenuUtama extends AppCompatActivity
@@ -48,6 +53,10 @@ public class MenuUtama extends AppCompatActivity
     private ViewPager mViewPager;
 
     private String[] tabs = { "Resep", "Rekomendasi", "Jenis" };
+
+    ResepFragment resepFragment;
+    RekomendasiFragment rekomendasiFragment;
+    ImageView shareIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +84,6 @@ public class MenuUtama extends AppCompatActivity
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
     }
 
     @Override

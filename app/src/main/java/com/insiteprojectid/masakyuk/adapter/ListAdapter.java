@@ -2,6 +2,7 @@ package com.insiteprojectid.masakyuk.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,17 +32,6 @@ public class ListAdapter extends BaseAdapter {
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater = null;
 
-//    private final Activity context;
-//    private final String[] menuItem;
-//    private final Integer[] menuGambar;
-//
-//    public ListAdapter(Activity context, String[] menuItem, Integer[] menuGambar) {
-//        super(context, R.layout.list_item, menuItem);
-//        this.context = context;
-//        this.menuItem = menuItem;
-//        this.menuGambar = menuGambar;
-//    }
-
     public ListAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
         activity = a;
         data = d;
@@ -66,11 +56,11 @@ public class ListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View rowView = convertView;
         if (convertView == null)
             rowView = inflater.inflate(R.layout.list_item, null);
-//        LayoutInflater inflater = activity.getLayoutInflater();
-//        View rowView = inflater.inflate(R.layout.list_item,null,true);
+
         TextView namaResep = (TextView)rowView.findViewById(R.id.nama_resep);
         ImageView gambarResep = (ImageView) rowView.findViewById(R.id.imageView);
 
@@ -79,20 +69,20 @@ public class ListAdapter extends BaseAdapter {
 
         namaResep.setText(daftar_resep.get(resepModel.getJudul()));
         Picasso.with(activity.getApplicationContext()).load(daftar_resep.get(resepModel.getGambar())).into(gambarResep);
+
+        final String judul_inner = daftar_resep.get(resepModel.getJudul());
+        ImageView shareIcon = (ImageView)rowView.findViewById(R.id.share);
+        shareIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(Intent.ACTION_SEND);
+                a.setType("text/plain");
+                a.putExtra(Intent.EXTRA_SUBJECT, "Masak Yuk");
+                a.putExtra(Intent.EXTRA_TEXT, "Masak "+judul_inner+" yuk! Download aplikasi Masak Yuk di Play Store sekarang juga.");
+                activity.startActivity(Intent.createChooser(a,"Share it"));
+            }
+        });
         return rowView;
     }
 
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        LayoutInflater inflater = context.getLayoutInflater();
-//        View rowView = inflater.inflate(R.layout.list_item,null,true);
-//
-//        TextView namaResep = (TextView)rowView.findViewById(R.id.nama_resep);
-//        ImageView gambarResep = (ImageView) rowView.findViewById(R.id.imageView);
-//
-//        namaResep.setText(menuItem[position]);
-//        gambarResep.setImageResource(menuGambar[position]);
-//
-//        return rowView;
-//    }
 }

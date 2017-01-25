@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class ResepFragment extends Fragment {
     ResepModel resepModel;
     ListAdapter listAdapter;
     JSONArray jsonArray;
+    ImageView shareIcon;
 
     public ResepFragment() {
         // Required empty public constructor
@@ -60,19 +62,22 @@ public class ResepFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_resep, container, false);
         lv = (ListView)rootView.findViewById(R.id.list_resep);
         DaftarResep = new ArrayList<>();
+        shareIcon = (ImageView)rootView.findViewById(R.id.share);
 
         loadResep();
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent i = new Intent(getActivity().getApplicationContext(),ResepActivity.class);
-//                String selectedItem = menuItem[position];
-//                Toast.makeText(getActivity().getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
-//                startActivity(i);
-////                getActivity().finish();
-//            }
-//        });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                HashMap<String,String> map = DaftarResep.get(position);
+                Intent i = new Intent(getActivity().getApplicationContext(),ResepActivity.class);
+                i.putExtra(resepModel.id_resep,map.get(resepModel.id_resep));
+                i.putExtra(resepModel.link_youtube,map.get(resepModel.link_youtube));
+                i.putExtra(resepModel.judul,map.get(resepModel.judul));
+                startActivity(i);
+            }
+
+        });
 
         return rootView;
     }

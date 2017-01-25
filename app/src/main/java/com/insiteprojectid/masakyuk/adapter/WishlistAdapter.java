@@ -29,7 +29,7 @@ public class WishlistAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.list_jenis,null,true);
+        View rowView = inflater.inflate(R.layout.list_wish,null,true);
 
         TextView namaResep = (TextView)rowView.findViewById(R.id.wish_nama_resep);
         TextView jenisResep = (TextView) rowView.findViewById(R.id.wish_jenis_resep);
