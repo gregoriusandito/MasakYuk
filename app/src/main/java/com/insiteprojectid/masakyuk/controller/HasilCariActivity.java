@@ -68,8 +68,11 @@ public class HasilCariActivity extends AppCompatActivity {
                 HashMap<String,String> map = DaftarResep.get(position);
                 Intent i = new Intent(getApplicationContext(),ResepActivity.class);
                 i.putExtra(resepModel.id_resep,map.get(resepModel.id_resep));
+                i.putExtra(resepModel.id_cat,map.get(resepModel.id_cat));
                 i.putExtra(resepModel.link_youtube,map.get(resepModel.link_youtube));
                 i.putExtra(resepModel.judul,map.get(resepModel.judul));
+                i.putExtra(resepModel.gambar,map.get(resepModel.gambar));
+                i.putExtra(resepModel.rekomendasi,map.get(resepModel.rekomendasi));
                 startActivity(i);
             }
 

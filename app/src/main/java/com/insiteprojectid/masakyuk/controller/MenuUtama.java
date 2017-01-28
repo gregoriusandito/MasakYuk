@@ -239,6 +239,7 @@ public class MenuUtama extends AppCompatActivity
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+
         }
 
         @Override
@@ -261,6 +262,11 @@ public class MenuUtama extends AppCompatActivity
         public int getCount() {
             // Show 3 total pages.
             return FRAGMENT_COUNT;
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
 
         @Override

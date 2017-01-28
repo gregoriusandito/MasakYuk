@@ -9,10 +9,10 @@
         <item
             android:id="@+id/masukan"
             android:icon="@drawable/discuss_issue"
-            android:title="Tools" />
+            android:title="Beri Masukan" />
     </group>
 
-    <item android:title="Communicate">
+    <item>
         <menu>
             <item
                 android:id="@+id/share"

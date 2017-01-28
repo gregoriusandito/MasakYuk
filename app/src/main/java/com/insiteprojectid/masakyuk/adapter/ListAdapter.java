@@ -80,7 +80,7 @@ public class ListAdapter extends BaseAdapter {
 
         db = new WishListModel(ListAdapter.inflater.getContext());
         if(db.isExists(daftar_resep.get(resepModel.getId_resep()))){
-            favouriteIcon.setImageResource(R.drawable.heart_black);
+            favouriteIcon.setImageResource(R.drawable.heart_red);
         } else {
             favouriteIcon.setImageResource(R.drawable.heart_white);
         }
@@ -109,7 +109,7 @@ public class ListAdapter extends BaseAdapter {
                 } else {
                     if(db.getResepCount() < 3) {
                         db.addResep(finalDaftar_resep.get(resepModel.getId_resep()), finalDaftar_resep.get(resepModel.getId_cat()), finalDaftar_resep.get(resepModel.getJudul()), finalDaftar_resep.get(resepModel.getGambar()), finalDaftar_resep.get(resepModel.getLink_youtube()), finalDaftar_resep.get(resepModel.getRekomendasi()));
-                        favouriteIcon.setImageResource(R.drawable.heart_black);
+                        favouriteIcon.setImageResource(R.drawable.heart_red);
                     } else {
                         Toast.makeText(ListAdapter.inflater.getContext(), "Wishlist anda penuh", Toast.LENGTH_LONG).show();
                     }

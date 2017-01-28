@@ -24,6 +24,7 @@ import com.insiteprojectid.masakyuk.adapter.ListAdapter;
 import com.insiteprojectid.masakyuk.model.BahanModel;
 import com.insiteprojectid.masakyuk.model.CaraModel;
 import com.insiteprojectid.masakyuk.model.ResepModel;
+import com.insiteprojectid.masakyuk.model.WishListModel;
 import com.insiteprojectid.masakyuk.utils.Config;
 import com.insiteprojectid.masakyuk.R;
 import com.insiteprojectid.masakyuk.utils.UIUtils;
@@ -45,7 +46,7 @@ public class ResepActivity extends YouTubeBaseActivity implements YouTubePlayer.
 
     private ListView listBahan, listCara;
     private TextView judul_resep;
-    private String id_resep, link_youtube, judul;
+    private String id_resep, link_youtube, judul, rekomendasi, gambar, id_cat;
 
     ArrayList<HashMap<String, String>> DaftarBahan = new ArrayList<>();
     ArrayList<HashMap<String, String>> DaftarCara = new ArrayList<>();
@@ -57,6 +58,7 @@ public class ResepActivity extends YouTubeBaseActivity implements YouTubePlayer.
     BahanAdapter bahanAdapter;
     CaraAdapter caraAdapter;
     JSONArray jsonArray;
+    private WishListModel db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +76,14 @@ public class ResepActivity extends YouTubeBaseActivity implements YouTubePlayer.
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
+        db = new WishListModel(getApplicationContext());
+
         id_resep = getIntent().getStringExtra(resepModel.getId_resep());
+        id_cat = getIntent().getStringExtra(resepModel.getId_cat());
         link_youtube = getIntent().getStringExtra(resepModel.getLink_youtube());
         judul = getIntent().getStringExtra(resepModel.getJudul());
+        gambar = getIntent().getStringExtra(resepModel.getGambar());
+        rekomendasi = getIntent().getStringExtra(resepModel.getRekomendasi());
 
         listBahan = (ListView)findViewById(R.id.listBahan);
         listCara = (ListView)findViewById(R.id.listCara);
@@ -84,6 +91,12 @@ public class ResepActivity extends YouTubeBaseActivity implements YouTubePlayer.
         judul_resep.setText(judul);
 
         loadBahan(id_resep);
+
+        if(db.isExists(id_resep)){
+            favourite.setImageResource(R.drawable.heart_red);
+        } else {
+            favourite.setImageResource(R.drawable.heart_white);
+        }
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +106,24 @@ public class ResepActivity extends YouTubeBaseActivity implements YouTubePlayer.
                 a.putExtra(Intent.EXTRA_SUBJECT, "Masak Yuk");
                 a.putExtra(Intent.EXTRA_TEXT, "Masak "+judul+" yuk! Download aplikasi Masak Yuk di Play Store sekarang juga.");
                 startActivity(Intent.createChooser(a,"Share it"));
+            }
+        });
+
+        favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db = new WishListModel(getApplicationContext());
+                if(db.isExists(id_resep)){
+                    db.deleteResep(id_resep);
+                    favourite.setImageResource(R.drawable.heart_white);
+                } else {
+                    if(db.getResepCount() < 3) {
+                        db.addResep(id_resep, id_cat, judul, gambar, link_youtube, rekomendasi);
+                        favourite.setImageResource(R.drawable.heart_red);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Wishlist anda penuh", Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
 

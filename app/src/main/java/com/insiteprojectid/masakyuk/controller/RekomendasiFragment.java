@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class RekomendasiFragment extends Fragment {
     ResepModel resepModel;
     ListAdapter listAdapter;
     JSONArray jsonArray;
+    ImageView shareIcon, favouriteIcon;
 
     public RekomendasiFragment() {
         // Required empty public constructor
@@ -58,6 +60,8 @@ public class RekomendasiFragment extends Fragment {
         // Inflate the layout for this fragment
         lv = (ListView)rootView.findViewById(R.id.list_rekomendasi);
         DaftarResep = new ArrayList<>();
+        shareIcon = (ImageView)rootView.findViewById(R.id.share);
+        favouriteIcon = (ImageView)rootView.findViewById(R.id.fav);
 
         loadResepRekomendasi();
 
@@ -68,11 +72,14 @@ public class RekomendasiFragment extends Fragment {
                 HashMap<String,String> map = DaftarResep.get(position);
                 Intent i = new Intent(getActivity().getApplicationContext(),ResepActivity.class);
                 i.putExtra(resepModel.id_resep,map.get(resepModel.id_resep));
+                i.putExtra(resepModel.id_cat,map.get(resepModel.id_cat));
                 i.putExtra(resepModel.link_youtube,map.get(resepModel.link_youtube));
                 i.putExtra(resepModel.judul,map.get(resepModel.judul));
+                i.putExtra(resepModel.gambar,map.get(resepModel.gambar));
+                i.putExtra(resepModel.rekomendasi,map.get(resepModel.rekomendasi));
                 startActivity(i);
-//                getActivity().finish();
             }
+
         });
 
         return rootView;

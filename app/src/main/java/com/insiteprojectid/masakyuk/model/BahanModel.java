@@ -8,12 +8,16 @@ public class BahanModel {
 
     public static final String BASE_URL="http://192.168.0.120/masakyuk/";
     public static final String GET_LIST_BAHAN_RESEP=BASE_URL+"Welcome/get_list_bahan_resep";
+    public static final String GET_LIST_BAHAN_FROM_WISHLIST=BASE_URL+"Welcome/get_list_total_bahan";
+    public static final String GET_LIST_HARGA_BAHAN_FROM_WISHLIST=BASE_URL+"Welcome/get_list_total_harga";
 
     public static final String id_resep="id_resep";
     public static final String id_bahan_utama="id_bahan_utama";
     public static final String banyaknya="banyaknya";
     public static final String satuan="satuan";
     public static final String nama_bahan="nama_bahan";
+    public static final String harga_per_satuan="harga_per_satuan";
+    public static final String per="per";
 
     public static String getId_resep() {
         return id_resep;
@@ -33,5 +37,13 @@ public class BahanModel {
 
     public static String getNama_bahan() {
         return nama_bahan;
+    }
+
+    public static String getHarga_per_satuan() {
+        return harga_per_satuan;
+    }
+
+    public static String getPer() {
+        return per;
     }
 }
