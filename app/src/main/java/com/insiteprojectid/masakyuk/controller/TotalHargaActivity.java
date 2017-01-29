@@ -1,10 +1,19 @@
 package com.insiteprojectid.masakyuk.controller;
 
 import android.app.ProgressDialog;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -15,6 +24,7 @@ import com.insiteprojectid.masakyuk.R;
 import com.insiteprojectid.masakyuk.adapter.TotalBahanAdapter;
 import com.insiteprojectid.masakyuk.adapter.TotalHargaAdapter;
 import com.insiteprojectid.masakyuk.model.BahanModel;
+import com.insiteprojectid.masakyuk.utils.UIUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,13 +36,21 @@ import java.util.Map;
 
 public class TotalHargaActivity extends AppCompatActivity {
 
-    private ListView lv;
-    private static final String TAG = TotalHargaActivity.class.getSimpleName();
-    ArrayList<HashMap<String, String>> DaftarBahan = new ArrayList<>();
-    ProgressDialog pDialog;
-    BahanModel bahanModel;
-    TotalHargaAdapter totalHargaAdapter;
-    JSONArray jsonArray;
+    /**
+     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * fragments for each of the sections. We use a
+     * {@link FragmentPagerAdapter} derivative, which will keep every
+     * loaded fragment in memory. If this becomes too memory intensive, it
+     * may be best to switch to a
+     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    /**
+     * The {@link ViewPager} that will host the section contents.
+     */
+    private ViewPager mViewPager;
+
     String id_resep_1, id_resep_2, id_resep_3;
 
     @Override
@@ -40,101 +58,105 @@ public class TotalHargaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total_harga);
 
-        lv = (ListView)findViewById(R.id.list_total_harga);
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
-
         id_resep_1 = getIntent().getStringExtra("id_resep");
         id_resep_2 = getIntent().getStringExtra("id_resep_2");
         id_resep_3 = getIntent().getStringExtra("id_resep_3");
 
-        loadHarga(id_resep_1,id_resep_2,id_resep_3);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
 
     }
 
-    private void loadHarga(final String id_resep, final String id_resep_2, final String id_resep_3){
-        String tag_string_req = "req_load_harga";
-        pDialog.setMessage("Memuat ...");
-        showDialog();
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class PlaceholderFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, BahanModel.GET_LIST_HARGA_BAHAN_FROM_WISHLIST, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Harga Response: " + response.toString());
-                hideDialog();
+        public PlaceholderFragment() {
+        }
 
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    jsonArray = jObj.getJSONArray("harga");
-                    for(int i = 0; i < jsonArray.length(); i++){
-                        JSONObject c = jsonArray.getJSONObject(i);
-                        String banyaknya = c.getString("banyaknya");
-                        String satuan = c.getString("satuan");
-                        String nama_bahan = c.getString("nama_bahan");
-                        String per = c.getString("per");
-                        String harga_per_satuan = c.getString("harga_per_satuan");
-                        HashMap<String,String> map_bahan = new HashMap<>();
-                        map_bahan.put(bahanModel.banyaknya,banyaknya);
-                        map_bahan.put(bahanModel.satuan,satuan);
-                        map_bahan.put(bahanModel.nama_bahan,nama_bahan);
-                        map_bahan.put(bahanModel.harga_per_satuan,harga_per_satuan);
-                        map_bahan.put(bahanModel.per,per);
-                        DaftarBahan.add(map_bahan);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                SetListBahan(DaftarBahan);
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Harga Load Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                if(id_resep_1 != null && id_resep_2 == null && id_resep_3 == null){
-                    params.put("id_resep_1", id_resep);
-                } else if(id_resep_1 != null && id_resep_2 != null && id_resep_3 == null){
-                    params.put("id_resep_1", id_resep);
-                    params.put("id_resep_2", id_resep_2);
-                } else if(id_resep_1 != null && id_resep_2 != null && id_resep_3 != null){
-                    params.put("id_resep_1", id_resep);
-                    params.put("id_resep_2", id_resep_2);
-                    params.put("id_resep_3", id_resep_3);
-                }
-                return params;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
-
-    private void SetListBahan(ArrayList<HashMap<String, String>> daftarBahan) {
-        if(daftarBahan.size() == 0) {
-            totalHargaAdapter = new TotalHargaAdapter(this, new ArrayList<HashMap<String, String>>());
-//            emptyTV.setText("Tidak ada komentar");
-            lv.setAdapter(totalHargaAdapter);
-            totalHargaAdapter.notifyDataSetInvalidated();
-        } else {
-            totalHargaAdapter = new TotalHargaAdapter(this, daftarBahan);
-            lv.setAdapter(totalHargaAdapter);
-            totalHargaAdapter.notifyDataSetChanged();
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            return rootView;
         }
     }
 
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        private static final int FRAGMENT_COUNT = 2;
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            switch (position){
+                case 0:
+                    return new HargaFragment();
+                case 1:
+                    return new ListHargaFragment();
+            }
+            return null;
+//            return PlaceholderFragment.newInstance(position + 1);
+        }
+
+        @Override
+        public int getCount() {
+            // Show 2 total pages.
+            return FRAGMENT_COUNT;
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "Total Harga";
+                case 1:
+                    return "Rincian";
+            }
+            return null;
+        }
     }
 
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
+
 }

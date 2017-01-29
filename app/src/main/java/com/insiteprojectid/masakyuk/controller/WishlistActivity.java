@@ -16,6 +16,7 @@ import com.insiteprojectid.masakyuk.adapter.ListAdapter;
 import com.insiteprojectid.masakyuk.adapter.WishlistAdapter;
 import com.insiteprojectid.masakyuk.model.ResepModel;
 import com.insiteprojectid.masakyuk.model.WishListModel;
+import com.insiteprojectid.masakyuk.utils.UIUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +50,7 @@ public class WishlistActivity extends AppCompatActivity {
         } else {
             lv.setAdapter(adapter);
             emptyList.setVisibility(View.GONE);
+            UIUtils.setListViewHeightBasedOnItems(lv);
             adapter.notifyDataSetChanged();
         }
 
@@ -125,10 +127,56 @@ public class WishlistActivity extends AppCompatActivity {
                 }
             }
         });
+
+        lihatHarga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(wm.getListResep().getCount() == 0) {
+                    // intentionally left blank
+                } else if (wm.getListResep().getCount() == 1) {
+                    Cursor cursor = adapter.getCursor();
+                    cursor.moveToPosition(0);
+                    String id_resep = cursor.getString(cursor.getColumnIndex("id_resep"));
+                    Intent i = new Intent(getApplicationContext(),TotalHargaActivity.class);
+                    i.putExtra("id_resep",id_resep);
+                    startActivity(i);
+                } else if (wm.getListResep().getCount() == 2) {
+                    // first
+                    Cursor one = adapter.getCursor();
+                    one.moveToPosition(0);
+                    String id_resep = one.getString(one.getColumnIndex("id_resep"));
+
+                    //second
+                    Cursor second = adapter.getCursor();
+                    second.moveToPosition(1);
+                    String id_resep_2 = second.getString(one.getColumnIndex("id_resep"));
+
+                    Intent i = new Intent(getApplicationContext(),TotalHargaActivity.class);
+                    i.putExtra("id_resep",id_resep);
+                    i.putExtra("id_resep_2",id_resep_2);
+                    startActivity(i);
+                } else if (wm.getListResep().getCount() == 3) {
+                    // first
+                    Cursor one = adapter.getCursor();
+                    one.moveToPosition(0);
+                    String id_resep = one.getString(one.getColumnIndex("id_resep"));
+
+                    //second
+                    Cursor second = adapter.getCursor();
+                    second.moveToPosition(1);
+                    String id_resep_2 = second.getString(second.getColumnIndex("id_resep"));
+
+                    Cursor third = adapter.getCursor();
+                    third.moveToPosition(2);
+                    String id_resep_3 = third.getString(third.getColumnIndex("id_resep"));
+
+                    Intent i = new Intent(getApplicationContext(), TotalHargaActivity.class);
+                    i.putExtra("id_resep", id_resep);
+                    i.putExtra("id_resep_2", id_resep_2);
+                    i.putExtra("id_resep_3", id_resep_3);
+                    startActivity(i);
+                }
+            }
+        });
     }
-
-
-
-
-
 }

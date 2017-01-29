@@ -7,151 +7,98 @@
     android:id="@+id/main"
     tools:context="com.insiteprojectid.masakyuk.controller.ResepActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/scrollView2">
+    <!--<com.google.android.youtube.player.YouTubePlayerView-->
+        <!--android:id="@+id/youtube_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"/>-->
 
-        <LinearLayout
+    <fragment
+        android:id="@+id/youtube_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.google.android.youtube.player.YouTubePlayerFragment">
+    </fragment>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:cardBackgroundColor="@color/boxInfo"
+        android:layout_below="@id/youtube_view"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/card"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.youtube.player.YouTubePlayerView
-                    android:id="@+id/youtube_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    app:cardBackgroundColor="@color/boxInfo"
-                    android:layout_below="@id/youtube_view"
-                    android:layout_alignParentLeft="true"
-                    android:id="@+id/card"
-                    android:layout_alignParentStart="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true">
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/share"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentRight="true"
-                            android:paddingBottom="@dimen/text_list_padding_vertical"
-                            android:paddingTop="@dimen/text_list_padding_vertical"
-                            android:id="@+id/share_resep" />
-
-                        <TextView
-                            android:text="Nama Resep"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/nama_resep"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentLeft="true"
-                            android:textSize="16dp"
-                            android:paddingBottom="@dimen/text_list_padding_vertical"
-                            android:paddingTop="@dimen/text_list_padding_vertical"
-                            android:paddingLeft="@dimen/text_list_padding_horizontal"
-                            android:textColor="#ffffff"/>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/heart_white"
-                            android:paddingBottom="@dimen/text_list_padding_vertical"
-                            android:paddingTop="@dimen/text_list_padding_vertical"
-                            android:id="@+id/fav_resep"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@id/share_resep" />
-
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-
-            </RelativeLayout>
-            <TextView
-                android:text="@string/bahan"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="27dp"
-                android:layout_marginStart="27dp"
-                android:layout_marginTop="28dp"
-                android:id="@+id/judul_bahan" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="27dp"
-                android:layout_marginRight="27dp"
-                android:layout_gravity="center"
-                android:background="@color/boxInfo" />
-
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="27dp"
-                android:layout_marginRight="27dp"
-                >
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/listBahan"/>
-
-            </FrameLayout>
+                android:src="@drawable/share"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:paddingBottom="@dimen/text_list_padding_vertical"
+                android:paddingTop="@dimen/text_list_padding_vertical"
+                android:id="@+id/share_resep" />
 
             <TextView
-                android:text="@string/cara_masak"
+                android:text="Nama Resep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/nama_resep"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="27dp"
-                android:layout_marginStart="27dp"
-                android:layout_marginTop="28dp"
-                android:id="@+id/judul_cara" />
+                android:textSize="16dp"
+                android:paddingBottom="@dimen/text_list_padding_vertical"
+                android:paddingTop="@dimen/text_list_padding_vertical"
+                android:paddingLeft="@dimen/text_list_padding_horizontal"
+                android:textColor="#ffffff"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="27dp"
-                android:layout_marginRight="27dp"
-                android:layout_gravity="center"
-                android:background="@color/boxInfo" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/heart_white"
+                android:paddingBottom="@dimen/text_list_padding_vertical"
+                android:paddingTop="@dimen/text_list_padding_vertical"
+                android:id="@+id/fav_resep"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/share_resep" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="27dp"
-                android:layout_marginRight="27dp"
-                >
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/listCara"/>
-            </FrameLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
-        </LinearLayout>
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBar"
+        android:layout_below="@id/card">
 
-    </ScrollView>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_below="@id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+
 
 </RelativeLayout>

@@ -26,7 +26,7 @@ public class TotalHargaAdapter extends BaseAdapter {
     private MenuUtama menuUtama;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater = null;
-    private Integer jumlah, per, harga_per_satuan, total;
+    private Double jumlah, per, harga_per_satuan, total;
 
     public TotalHargaAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
         activity = a;
@@ -63,12 +63,13 @@ public class TotalHargaAdapter extends BaseAdapter {
         HashMap<String, String> daftar_bahan = new HashMap<String, String>();
         daftar_bahan = data.get(position);
 
-        jumlah = jumlah.parseInt(daftar_bahan.get(bahanModel.getBanyaknya()));
-        per = per.parseInt(daftar_bahan.get(bahanModel.getPer()));
-        harga_per_satuan = harga_per_satuan.parseInt(daftar_bahan.get(bahanModel.getHarga_per_satuan()));
+        jumlah = Double.parseDouble(daftar_bahan.get(bahanModel.getBanyaknya()));
+        per = Double.parseDouble(daftar_bahan.get(bahanModel.getPer()));
+        harga_per_satuan = Double.parseDouble(daftar_bahan.get(bahanModel.getHarga_per_satuan()));
 
-        total = (jumlah/per) * (harga_per_satuan);
-        String total_str= total.toString();
+        total = (jumlah/per)*harga_per_satuan;
+        Long temp = Math.round(total);
+        String total_str= temp.toString();
 
         banyakBahan.setText(daftar_bahan.get(bahanModel.getBanyaknya()));
         satuanBahan.setText(daftar_bahan.get(bahanModel.getSatuan()));

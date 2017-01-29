@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.insiteprojectid.masakyuk.controller.HargaFragment">
+
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/satuan_total"
+        android:visibility="gone"/>
+
+    <android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:id="@+id/cardview_total"
+    android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <TextView
+    android:text="Total"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/nama_bahan_total"
+    android:layout_marginLeft="20dp"
+    android:layout_marginStart="20dp"
+    android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    />
+
+        <TextView
+            android:text="Rp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mata_uang"
+            android:layout_marginRight="130dp"
+            android:layout_marginEnd="130dp"
+            android:layout_alignBaseline="@+id/nama_bahan_total"
+            android:layout_alignBottom="@+id/nama_bahan_total"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text="Harga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/harga_total"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/mata_uang"
+            android:layout_alignStart="@+id/mata_uang"
+            />
+
+    </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+    android:text="@string/keterangan_total_harga"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/textVketerangan"
+    android:textSize="12dp"
+    android:layout_below="@id/cardview_total"/>
+
+</RelativeLayout>

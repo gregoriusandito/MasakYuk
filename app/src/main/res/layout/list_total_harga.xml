@@ -13,27 +13,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="Nama Bahan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:id="@+id/nama_bahan_total"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:text="Ukuran"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:layout_alignTop="@+id/nama_bahan_total"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/banyaknya_bahan_total" />
-
-            <TextView
                 android:text="Satuan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,28 +25,50 @@
                 android:id="@+id/satuan_total" />
 
             <TextView
-                android:text="Rp"
+                android:text="Ukuran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/satuan_total"
-                android:layout_toRightOf="@+id/satuan_total"
-                android:layout_toEndOf="@+id/satuan_total"
+                android:textSize="12dp"
+                android:id="@+id/banyaknya_bahan_total"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/nama_bahan_total"
+                android:layout_alignStart="@+id/nama_bahan_total"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:text="Nama Bahan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:id="@+id/nama_bahan_total"
                 android:layout_marginLeft="19dp"
                 android:layout_marginStart="19dp"
-                android:textSize="12dp"
-                android:id="@+id/mata_uang" />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="11dp" />
 
             <TextView
                 android:text="Harga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/mata_uang"
-                android:layout_toEndOf="@+id/mata_uang"
-                android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp"
+                android:id="@+id/harga_total"
                 android:textSize="12dp"
-                android:id="@+id/harga_total" />
+                android:layout_alignBaseline="@+id/mata_uang"
+                android:layout_alignBottom="@+id/mata_uang"
+                android:layout_toRightOf="@id/mata_uang"/>
+
+            <TextView
+                android:text="              Rp "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mata_uang"
+                android:textSize="12dp"
+                android:layout_marginLeft="130dp"
+                android:layout_marginStart="130dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/satuan_total"
+                android:layout_toEndOf="@+id/satuan_total" />
 
 
         </RelativeLayout>

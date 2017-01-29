@@ -1,101 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_total_harga"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.insiteprojectid.masakyuk.controller.TotalHargaActivity">
 
-    <ListView
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBar">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_below="@id/appBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/list_total_harga" />
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_below="@id/list_total_harga"
-        android:id="@+id/cardview_total"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:text="Nama Bahan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:id="@+id/nama_bahan_total"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:visibility="invisible"/>
-
-            <TextView
-                android:text="Total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:layout_alignTop="@+id/nama_bahan_total"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/banyaknya_bahan_total" />
-
-            <TextView
-                android:text="Satuan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:layout_alignTop="@+id/banyaknya_bahan_total"
-                android:layout_toRightOf="@+id/banyaknya_bahan_total"
-                android:layout_toEndOf="@+id/banyaknya_bahan_total"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:id="@+id/satuan_total"
-                android:visibility="invisible"/>
-
-            <TextView
-                android:text="Rp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/satuan_total"
-                android:layout_toRightOf="@+id/satuan_total"
-                android:layout_toEndOf="@+id/satuan_total"
-                android:layout_marginLeft="19dp"
-                android:layout_marginStart="19dp"
-                android:textSize="12dp"
-                android:id="@+id/mata_uang" />
-
-            <TextView
-                android:text="Harga"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/mata_uang"
-                android:layout_toEndOf="@+id/mata_uang"
-                android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp"
-                android:textSize="12dp"
-                android:id="@+id/harga_total" />
-
-
-        </RelativeLayout>
-
-
-    </android.support.v7.widget.CardView>
-
-    <TextView
-        android:text="@string/keterangan_total_harga"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textVketerangan"
-        android:textSize="12dp"
-        android:layout_below="@id/cardview_total"/>
 </RelativeLayout>

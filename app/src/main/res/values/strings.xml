@@ -15,6 +15,9 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="keterangan_total_harga">*Harga diatas hanyalah estimasi dan dapat berubah sewaktu-waktu. Harga tidak mengikat, dapat lebih murah atau lebih mahal bergantung pada kondisi pasar</string>
-    
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
