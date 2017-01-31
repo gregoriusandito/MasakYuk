@@ -2,7 +2,10 @@ package com.insiteprojectid.masakyuk.controller;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.insiteprojectid.masakyuk.R;
 import com.insiteprojectid.masakyuk.adapter.ListAdapter;
+import com.insiteprojectid.masakyuk.adapter.RekomendasiAdapter;
 import com.insiteprojectid.masakyuk.model.ResepModel;
 
 import org.json.JSONArray;
@@ -41,9 +46,10 @@ public class RekomendasiFragment extends Fragment {
     ProgressDialog pDialog;
     private static final String TAG = MenuUtama.class.getSimpleName();
     ResepModel resepModel;
-    ListAdapter listAdapter;
+    RekomendasiAdapter rekomendasiAdapter;
     JSONArray jsonArray;
-    ImageView shareIcon, favouriteIcon;
+    ImageView shareIcon, favouriteIcon, connFailed;
+    ProgressBar barRekomendasi;
 
     public RekomendasiFragment() {
         // Required empty public constructor
@@ -55,15 +61,23 @@ public class RekomendasiFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_rekomendasi, container, false);
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setCancelable(false);
+//        pDialog = new ProgressDialog(getActivity());
+//        pDialog.setCancelable(false);
         // Inflate the layout for this fragment
         lv = (ListView)rootView.findViewById(R.id.list_rekomendasi);
         DaftarResep = new ArrayList<>();
         shareIcon = (ImageView)rootView.findViewById(R.id.share);
         favouriteIcon = (ImageView)rootView.findViewById(R.id.fav);
+        connFailed = (ImageView)rootView.findViewById(R.id.imgConnFailed);
+        barRekomendasi = (ProgressBar)rootView.findViewById(R.id.rekomendasiBar);
 
-        loadResepRekomendasi();
+        if (cekStatus(getActivity())){
+            loadResepRekomendasi();
+        } else{
+            connFailed.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity(),
+                    "Tidak Ada Koneksi", Toast.LENGTH_LONG).show();
+        }
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -85,9 +99,20 @@ public class RekomendasiFragment extends Fragment {
         return rootView;
     }
 
+    public boolean cekStatus(Context cek){
+        ConnectivityManager cm = (ConnectivityManager)cek.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        if(info != null && info.isConnected()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     private void loadResepRekomendasi(){
         String tag_string_req = "req_load_resep";
-        pDialog.setMessage("Memuat ...");
+//        pDialog.setMessage("Memuat ...");
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST, ResepModel.GET_REKOMENDASI, new Response.Listener<String>() {
@@ -134,8 +159,6 @@ public class RekomendasiFragment extends Fragment {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-//                params.put("id_kota", id_kota);
-//                params.put("id_wisata", id_wisata);
                 return params;
             }
         };
@@ -143,26 +166,30 @@ public class RekomendasiFragment extends Fragment {
     }
 
     private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
+        if(barRekomendasi.getVisibility() == View.GONE)
+            barRekomendasi.setVisibility(View.VISIBLE);
+//        if (!pDialog.isShowing())
+//            pDialog.show();
     }
 
     private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
+        if(barRekomendasi.getVisibility() != View.GONE)
+            barRekomendasi.setVisibility(View.GONE);
+//        if (pDialog.isShowing())
+//            pDialog.dismiss();
     }
 
     private void SetListResep(ArrayList<HashMap<String, String>> daftarResep) {
         if(daftarResep.size() == 0) {
-            listAdapter = new ListAdapter(getActivity(), new ArrayList<HashMap<String, String>>());
+            rekomendasiAdapter = new RekomendasiAdapter(getActivity(), new ArrayList<HashMap<String, String>>());
 //            emptyTV.setText("Tidak ada komentar");
-            lv.setAdapter(listAdapter);
-            listAdapter.notifyDataSetInvalidated();
+            lv.setAdapter(rekomendasiAdapter);
+            rekomendasiAdapter.notifyDataSetInvalidated();
         } else {
-            listAdapter = new ListAdapter(getActivity(), daftarResep);
-            lv.setAdapter(listAdapter);
+            rekomendasiAdapter = new RekomendasiAdapter(getActivity(), daftarResep);
+            lv.setAdapter(rekomendasiAdapter);
 //            UIUtils.setListViewHeightBasedOnItems(komentar);
-            listAdapter.notifyDataSetChanged();
+            rekomendasiAdapter.notifyDataSetChanged();
         }
 
     }
