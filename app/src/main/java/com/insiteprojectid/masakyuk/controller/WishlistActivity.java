@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.insiteprojectid.masakyuk.R;
 import com.insiteprojectid.masakyuk.adapter.ListAdapter;
@@ -46,6 +47,7 @@ public class WishlistActivity extends AppCompatActivity {
         final WishlistAdapter adapter = new WishlistAdapter(this, wm.getListResep());
         if(wm.getListResep().getCount() == 0) {
             lv.setAdapter(adapter);
+            Toast.makeText(getApplicationContext(), "Tidak Ada Data di Wishlist", Toast.LENGTH_LONG).show();
             adapter.notifyDataSetInvalidated();
         } else {
             lv.setAdapter(adapter);

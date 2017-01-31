@@ -166,17 +166,13 @@ public class RekomendasiFragment extends Fragment {
     }
 
     private void showDialog() {
-        if(barRekomendasi.getVisibility() == View.GONE)
+        if(!barRekomendasi.isShown())
             barRekomendasi.setVisibility(View.VISIBLE);
-//        if (!pDialog.isShowing())
-//            pDialog.show();
     }
 
     private void hideDialog() {
-        if(barRekomendasi.getVisibility() != View.GONE)
+        if(barRekomendasi.isShown())
             barRekomendasi.setVisibility(View.GONE);
-//        if (pDialog.isShowing())
-//            pDialog.dismiss();
     }
 
     private void SetListResep(ArrayList<HashMap<String, String>> daftarResep) {
