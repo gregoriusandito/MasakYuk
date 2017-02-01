@@ -32,7 +32,7 @@
         android:textAlignment="center" />
 
     <Button
-        android:id="@+id/btnLihatBahan"
+        android:id="@+id/tidak"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/btn_ulas_bg"
@@ -44,13 +44,13 @@
         android:layout_marginBottom="66dp" />
 
     <Button
-        android:id="@+id/btnLihatHarga"
+        android:id="@+id/beriUlasan"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/btn_ulas"
         android:text="Beri rating dan ulasan"
         android:textColor="@color/btn_ulas_bg"
-        android:layout_above="@+id/btnLihatBahan"
+        android:layout_above="@+id/tidak"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="36dp" />

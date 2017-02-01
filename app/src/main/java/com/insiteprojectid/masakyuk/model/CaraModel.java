@@ -6,7 +6,7 @@ package com.insiteprojectid.masakyuk.model;
 
 public class CaraModel {
 
-    public static final String BASE_URL="http://192.168.0.120/masakyuk/";
+    public static final String BASE_URL="http://masakyuk.pe.hu/";
     public static final String GET_LIST_CARA_MEMASAK=BASE_URL+"Welcome/get_list_cara_memasak";
 
     public static final String id_resep="id_resep";

@@ -6,7 +6,7 @@ package com.insiteprojectid.masakyuk.model;
 
 public class BahanModel {
 
-    public static final String BASE_URL="http://192.168.0.120/masakyuk/";
+    public static final String BASE_URL="http://masakyuk.pe.hu/";
     public static final String GET_LIST_BAHAN_RESEP=BASE_URL+"Welcome/get_list_bahan_resep";
     public static final String GET_LIST_BAHAN_FROM_WISHLIST=BASE_URL+"Welcome/get_list_total_bahan";
     public static final String GET_LIST_HARGA_BAHAN_FROM_WISHLIST=BASE_URL+"Welcome/get_list_total_harga";

@@ -5,7 +5,7 @@ package com.insiteprojectid.masakyuk.model;
  */
 public class ResepModel {
 
-    public static final String BASE_URL="http://192.168.0.120/masakyuk/";
+    public static final String BASE_URL="http://masakyuk.pe.hu/";
     public static final String BASE_IMG=BASE_URL+"gambar/";
     public static final String GET_RESEP=BASE_URL+"Welcome/get_resep";
     public static final String GET_REKOMENDASI=BASE_URL+"Welcome/get_rekomendasi_resep";
